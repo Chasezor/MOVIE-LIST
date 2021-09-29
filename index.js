@@ -34,8 +34,10 @@ const addMovie = (event) =>
 
 const deleteMovie = (event) =>
 {
+    console.log(event.target.parentNode.childNodes[0])
+    message.textContent = `${event.target.parentNode.childNodes[0]}`
     event.target.parentNode.remove()
-    message.textContent = 'Movie deleted!'
+    revealMessage()
 }
 
 const crossOffMovie = (event) =>
@@ -43,12 +45,18 @@ const crossOffMovie = (event) =>
     event.target.classList.toggle('checked')
     if(event.target.classList.contains('checked'))
     {
-        message.textContent = 'Movie watched!'
+        message.textContent = `${event.target.textContent} watched!`
     }
     else
     {
-        message.textContent = 'Movie added back!'
+        message.textContent = `${event.target.textContent} added back!`
     }
+    revealMessage()
+}
+
+const revealMessage = () =>{
+    message.classList.remove('hide')
+    setTimeout(()=>{message.classList.add('hide')}, 1000)
 }
 
 const clickMovie = document.querySelector('form')
